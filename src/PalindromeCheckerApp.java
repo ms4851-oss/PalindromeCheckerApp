@@ -1,30 +1,34 @@
+import java.util.Stack;
 public class PalindromeCheckerApp {
     public static void main(String[] args){
-        String input = "Racecar";
+        String input = "Madam";
 
         // Normalize (optional but recommended)
         String normalized = input.toLowerCase();
 
-        // Step 1: Convert string to char array
         char[] characters = normalized.toCharArray();
 
-        // Step 2: Two-pointer technique
-        int start = 0;
-        int end = characters.length - 1;
+        // Step 1: Create Stack
+        Stack<Character> stack = new Stack<>();
+
+        // Step 2: Push characters into stack
+        for (char ch : characters) {
+            stack.push(ch);
+        }
 
         boolean isPalindrome = true;
 
-        // Step 3: Compare characters
-        while (start < end) {
-            if (characters[start] != characters[end]) {
+        // Step 3: Pop and compare
+        for (int i = 0; i < characters.length; i++) {
+            char popped = stack.pop();
+
+            if (characters[i] != popped) {
                 isPalindrome = false;
                 break;
             }
-            start++;
-            end--;
         }
 
-        // Result
+        // Step 4: Print result
         if (isPalindrome) {
             System.out.println("Palindrome");
         } else {
